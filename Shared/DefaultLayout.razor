@@ -1,0 +1,22 @@
+@using System.Reflection
+@inherits LayoutComponentBase
+@* See also: https://github.com/jsakamoto/BlazingStory#%EF%B8%8F-configure-layouts *@
+
+<div style="margin:0; padding: 24px; display:flex; flex-direction:column; gap:24px;">
+    @Body
+
+    <footer>
+        Ignite UI for Blazor ver.@_versionOfIgniteUIforBlazor
+    </footer>
+</div>
+
+@code
+{
+    private string? _versionOfIgniteUIforBlazor;
+
+    protected override void OnInitialized()
+    {
+        var asmblyOfIgniteUIforBlazor = Assembly.Load("IgniteUI.Blazor");
+        _versionOfIgniteUIforBlazor = asmblyOfIgniteUIforBlazor?.GetName()?.Version?.ToString();
+    }
+}

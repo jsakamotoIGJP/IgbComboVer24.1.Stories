@@ -1,0 +1,99 @@
+﻿@attribute [Stories("Ignite UI for Blazor/IgbCombo")]
+
+<Stories TComponent="IgbCombo<object>">
+
+    <Story Name="T is object">
+        <Template>
+
+            <div>
+                <IgbCombo Data="_items1"
+                          ValueKey="@nameof(ItemTypeA.Id)"
+                          DisplayKey="@nameof(ItemTypeA.Text)"
+                          @bind-Value="_selectedItems1"
+                          @attributes="context.Args" />
+            </div>
+
+            <code>
+                _selectedItems1 = [
+                @foreach (var item in _selectedItems1)
+                {
+                    <div style="padding-left:2em;">@item.ToString(),</div>
+                }
+                ]
+            </code>
+
+        </Template>
+    </Story>
+
+    <Story Name="T is string">
+        <Template>
+
+            <div>
+                <IgbCombo Data="_items2"
+                          ValueKey="@nameof(ItemTypeB.Id)"
+                          DisplayKey="@nameof(ItemTypeB.Text)"
+                          @bind-Value="_selectedItems2"
+                          @attributes="context.Args" />
+            </div>
+
+            <code>
+                _selectedItems2 = [
+                @foreach (var item in _selectedItems2)
+                {
+                    <div style="padding-left:2em;">"@item.ToString()",</div>
+                }
+                ]
+            </code>
+
+        </Template>
+    </Story>
+
+    <Story Name="T is int">
+        <Template>
+
+            <div>
+                <IgbCombo Data="_items1"
+                          ValueKey="@nameof(ItemTypeB.Id)"
+                          DisplayKey="@nameof(ItemTypeB.Text)"
+                          @bind-Value="_selectedItems3"
+                          @attributes="context.Args" />
+            </div>
+
+            <code>
+                _selectedItems3 = [
+                @foreach (var item in _selectedItems3)
+                {
+                    <div style="padding-left:2em;">@item.ToString(),</div>
+                }
+                ]
+            </code>
+
+        </Template>
+    </Story>
+</Stories>
+
+@code 
+{
+    public record ItemTypeA(int Id, string Text);
+
+    public record ItemTypeB(string Id, string Text);
+
+    private readonly IEnumerable<ItemTypeA> _items1 = [
+    new(1, "Text 1"),
+    new(2, "Text 2"),
+    new(3, "Text 3"),
+    ];
+
+    private readonly IEnumerable<ItemTypeB> _items2 = [
+    new("001", "Text 1"),
+    new("002", "Text 2"),
+    new("003", "Text 3"),
+    ];
+
+    private object[] _selectedItems1 = [];
+    
+    private string[] _selectedItems2 = [];
+
+    private int[] _selectedItems3 = [];
+}
+
